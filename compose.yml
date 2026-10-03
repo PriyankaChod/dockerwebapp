@@ -1,0 +1,33 @@
+---
+services:
+  myapp:
+    image: appimage
+    ports:
+      - "1111:8080"
+    depends_on:
+      - devopsdb
+    deploy:
+      resources:
+        reservations:
+          cpus: "0.5"
+          memory: 100M
+        limits:
+          cpus: "1.0"
+          memory: 1000M
+  devopsdb:
+    image: devimage
+    ports:
+      - "3306:3306"
+    deploy:
+      resources:
+        reservations:
+          cpus: "0.5"
+          memory: 100M
+        limits:
+          cpus: "1.0"
+          memory: 1000M
+    volumes:
+      - my-data:/var/lib/mysql/
+volumes:
+  my-data:
+
